@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="https://cdn.discordapp.com/emojis/791742603183259648.webp?size=96&quality=lossless" type="image/x-icon">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  
+    <title>ViaVersion Generator | AlonsoAliaga Development</title>
+    
+    <meta name="theme-color" content="#9a14ff"/>
+    <meta property="og:title" content="ViaVersion Generator | AlonsoAliaga Development">
+    <meta property="og:image" content="https://raw.githubusercontent.com/AlonsoAliaga/alonsoaliaga.github.io/main/assets/img/apple-touch-icon.png">
+    <meta property="og:description" content="Whilelist/blacklist protocols of ViaVersion easily!">
+    <meta property="og:url" content="https://alonsoaliaga.github.io/index.html">
+  </head>
+  <body onload="loadCounter(); checkSite(window); updateResult();">
+    <div class="content">
+      <div class="header">
+        <h1 style="font-family: MinecraftBold;"><a href="https://alonsoaliaga.com/ViaVersion" rel="noopener" target="_blank">ViaVersion</a> Protocol Generator</h1>
+        <span style="font-family: MinecraftBold;">Options:</span>
+        <div id="appearance" style="display: inline-block;font-family: MinecraftBold;padding: 5px 10px 5px 10px;">
+          <input type="checkbox" checked id="darkmode" onclick="toggleDarkmode();"></input>
+          <label for="darkmode" style="margin-bottom: 0px;margin-top: 0px;"> Dark Mode 👁‍🗨</label>
+        </div>
+        <br>
+        <br>
+      </div>
+      <label id="graylabel2" class="gray" for="outputText" style="font-weight: bold;"><span style="color: #fc5044;">TIP: </span>Click below to copy the content!</label>
+      <div id="result" onclick="copyTextToClipboard(this.textContent);">
+        <h2 style="font-family: MinecraftBold;">Loading..</h2>
+      </div>
+      <br>
+      <div class="options">
+        <div id="table">
+          <input type="checkbox" id="version-mode" onclick="updateResult();"></input>
+          <label for="version-mode" style="margin-bottom: 0px;margin-top: 0px;"> Version Mode 🎉</label>
+          <input type="checkbox" id="whitelist-mode" onclick="updateResult();"></input>
+          <label for="whitelist-mode" style="margin-bottom: 0px;margin-top: 0px;"> Whitelist Mode 🏆</label>
+        </div><br>
+        <fieldset class="group"> 
+          <legend id="thelegend">&nbsp;&nbsp;&nbsp;Select versions to &nbsp;&nbsp;&nbsp;</legend> 
+          <ul id="table-protocols" class="checkbox">
+            Loading..
+          </ul> 
+        </fieldset><br>
+        <fieldset class="group" style="padding-bottom: 15px;font-size: 18px;"> 
+          <legend id="thelegend">&nbsp;&nbsp;&nbsp;Common options&nbsp;&nbsp;&nbsp;</legend> 
+          <ul id="table-protocols" class="checkbox">
+            <li>
+              <input class="button-solid" type="checkbox" id="mark-all-option" onclick="markAll(); this.checked = false">
+              <label for="mark-all-option" style="margin-bottom: 0px;margin-top: 0px;">✔️ Check all</label></input>
+            </li>
+            <li>
+              <input class="button-solid" type="checkbox" id="unmark-all-option" onclick="unmarkAll(); this.checked = false">
+              <label for="unmark-all-option" style="margin-bottom: 0px;margin-top: 0px;">📛 Uncheck all</label></input>
+            </li>
+            <li>
+              <input class="button-solid" type="checkbox" id="1_7_6-1_8_9" onclick="markBetween('1.7.6 ➤ 1.7.10','1.8 ➤ 1.8.9',true); this.checked = false">
+              <label for="1_7_6-1_8_9" style="margin-bottom: 0px;margin-top: 0px;">1.7.10 ➤ 1.8.9</label></input>
+            </li>
+            <li>
+              <input class="button-solid" type="checkbox" id="1_8_8-1_12_2" onclick="markBetween('1.8 ➤ 1.8.9','1.12.2',true); this.checked = false">
+              <label for="1_8_8-1_12_2" style="margin-bottom: 0px;margin-top: 0px;">1.8.8 ➤ 1.12.2</label></input>
+            </li>
+            <li>
+              <input class="button-solid" type="checkbox" id="1_9-and-above" onclick="markBetween('1.9','1.19',true); this.checked = false">
+              <label for="1_9-and-above" style="margin-bottom: 0px;margin-top: 0px;">1.9 and newer</label></input>
+            </li>
+            <li>
+              <input class="button-solid" type="checkbox" id="1_12_2_and-above" onclick="markBetween('1.12.2','1.19',true); this.checked = false">
+              <label for="1_12_2_and-above" style="margin-bottom: 0px;margin-top: 0px;">1.12.2 and newer</label></input>
+            </li>
+            <li>
+              <input class="button-solid" type="checkbox" id="1_16_4-and-above" onclick="markBetween('1.16.4 ➤ 1.16.5','1.19',true); this.checked = false">
+              <label for="1_16_4-and-above" style="margin-bottom: 0px;margin-top: 0px;">1.16.4 and newer</label></input>
+            </li>
+            <li>
+              <input class="button-solid" type="checkbox" id="1_18-and-above" onclick="markBetween('1.18 ➤ 1.18.1','1.19',true); this.checked = false">
+              <label for="1_18-and-above" style="margin-bottom: 0px;margin-top: 0px;">1.18 and newer</label></input>
+            </li>
+          </ul> 
+        </fieldset>
+      </div>
+      <br>
+      <!-- <div>
+        <div class="row">
+          <div class="col-md-3" style="font-size: 20px; font-family: MinecraftBold;">
+            <label for="output-indentation">Output indentation: </label>
+            <select id="output-indentation"
+                    class="form-control"
+                    onchange="updateOutputText(event);"
+                    style="font-size: 16px; padding: 5px 0px 5px 30px; width: auto; font-family: MinecraftRegular;">
+              <option value='0'>2 spaces</option>
+              <option value='1'>4 spaces</option>
+              <option value='2'>Tab spacing</option>
+            </select>
+          </div>
+        </div>
+      </div> -->
+      <div>
+        <div style="font-size: 18px ;padding-top: 20px;padding-bottom: 20px; font-family: MinecraftRegular;" class="examples">
+          <h2 style="font-size: 18px; font-family: MinecraftBold;">More tools for you:</h2>
+          <div style="text-align: left;font-size: 20px;">
+            <span >💠</span> <span class="rainbow" style="color:transparent"><a href="http://alonsoaliaga.github.io/generator">HEX Generator (RBG)</a></span><br>
+            <span >💠</span> <span><a href="http://alonsoaliaga.github.io/yaml-parser">YAML/JSON Parser</a></span><br>
+            <span >💠</span> <span><a href="http://alonsoaliaga.github.io/pretty-json">Pretty JSON</a></span>
+          </div>
+          <br>
+          <h2 style="color: transparent;font-size: 18px ;text-align: center; font-family: MinecraftBold;"><a href="https://alonsoaliaga.github.io" rel="noopener" target="_blank">AlonsoAliaga Development</a></h2>
+        </div>
+      </div>
+      <div>
+      <br>
+      <div style="font-family: MinecraftBold;" class="footer">
+        Project made to make it easier to edit these options for <a href="http://alonsoaliaga.com/ViaVersion">ViaVersion</a>.
+      </div>
+      <!-- <div id="mybutton">
+        <button class="buttonface"><a href="https://alonsoaliaga.github.io"><img src="https://raw.githubusercontent.com/AlonsoAliaga/alonsoaliaga.github.io/main/assets/img/apple-touch-icon.png"></a></button>
+      </div> -->
+      <div id="mybutton">
+        <div style="position: center;display: inline-block;">
+          <button class="buttonface"><a href="https://alonsoaliaga.github.io"><img src="https://raw.githubusercontent.com/AlonsoAliaga/alonsoaliaga.github.io/main/assets/img/apple-touch-icon.png"></a></button>
+          <br>
+          <div id="visitor-counter" style="text-align: center;">
+            <span id="counter-amount" style="font-family: MinecraftBold;font-weight: bold;">Visits: 0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script ></script>
+  </div>
+
+  <!-- <script src="jquery-1.6.1.min.js"></script> -->
+  <script src="script.js"></script>
+  <script src="autoresize.jquery.min.js"></script>
+  <!-- <script src="script.js"></script> -->
+  
+  <script>
+    
+  </script>
+  </body>
+</html>

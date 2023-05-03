@@ -108,6 +108,16 @@ const protocols = {
   },
   "1.19": {
     "number": 759,
+  },
+  "1.19.1 ➤ 1.19.2": {
+    "number": 760,
+    "versions": ["1.19.1","1.19.2"],
+  },
+  "1.19.3": {
+    "number": 761,
+  },
+  "1.19.4": {
+    "number": 762,
   }
 }
 createTableVersion();
@@ -133,7 +143,9 @@ function copyTextToClipboard(text) {
   textArea.select();
 
   document.execCommand('copy');
-  alert('You text was copied! Ready to paste!\n\nThanks for using our tool!\n- AlonsoAliaga');
+  //alert('You text was copied! Ready to paste!\n\nThanks for using our tool!\n- AlonsoAliaga');
+  
+  alertCopied();
   document.body.removeChild(textArea);
 }
 function markBetween(min,max,blacklist) {
@@ -311,5 +323,20 @@ function getUpdatedOutputText(data) {
   let indentationFormat = formats[document.getElementById('output-indentation').value] || formats.default;
   let result = JSON.stringify(obj, null, indentationFormat.space_key);
   return result;
+}
+
+let copiedTimeout;
+function alertCopied() {
+  if(copiedTimeout) {
+    clearTimeout(copiedTimeout);
+    var sb = document.getElementById("snackbar");
+    sb.className = sb.className.replace("show", "");
+  }
+  var sb = document.getElementById("snackbar");
+
+  //this is where the class name will be added & removed to activate the css
+  sb.className = "show";
+
+  copiedTimeout = setTimeout(()=>{ sb.className = sb.className.replace("show", ""); }, 3000);
 }
 toggleDarkmode();

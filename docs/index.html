@@ -33,6 +33,7 @@
       <div id="result" onclick="copyTextToClipboard(this.textContent);">
         <h2 style="font-family: MinecraftBold;">Loading..</h2>
       </div>
+      <span id="snackbar"><b>💎 Successfully Copied! 💎</b><br><span style="font-size: small;">Thanks for using our tool!</span></span>
       <br>
       <div class="options">
         <div id="table">
@@ -67,19 +68,19 @@
               <label for="1_8_8-1_12_2" style="margin-bottom: 0px;margin-top: 0px;">1.8.8 ➤ 1.12.2</label></input>
             </li>
             <li>
-              <input class="button-solid" type="checkbox" id="1_9-and-above" onclick="markBetween('1.9','1.19',true); this.checked = false">
+              <input class="button-solid" type="checkbox" id="1_9-and-above" onclick="markBetween('1.9','1.19.4',true); this.checked = false">
               <label for="1_9-and-above" style="margin-bottom: 0px;margin-top: 0px;">1.9 and newer</label></input>
             </li>
             <li>
-              <input class="button-solid" type="checkbox" id="1_12_2_and-above" onclick="markBetween('1.12.2','1.19',true); this.checked = false">
+              <input class="button-solid" type="checkbox" id="1_12_2_and-above" onclick="markBetween('1.12.2','1.19.4',true); this.checked = false">
               <label for="1_12_2_and-above" style="margin-bottom: 0px;margin-top: 0px;">1.12.2 and newer</label></input>
             </li>
             <li>
-              <input class="button-solid" type="checkbox" id="1_16_4-and-above" onclick="markBetween('1.16.4 ➤ 1.16.5','1.19',true); this.checked = false">
+              <input class="button-solid" type="checkbox" id="1_16_4-and-above" onclick="markBetween('1.16.4 ➤ 1.16.5','1.19.4',true); this.checked = false">
               <label for="1_16_4-and-above" style="margin-bottom: 0px;margin-top: 0px;">1.16.4 and newer</label></input>
             </li>
             <li>
-              <input class="button-solid" type="checkbox" id="1_18-and-above" onclick="markBetween('1.18 ➤ 1.18.1','1.19',true); this.checked = false">
+              <input class="button-solid" type="checkbox" id="1_18-and-above" onclick="markBetween('1.18 ➤ 1.18.1','1.19.4',true); this.checked = false">
               <label for="1_18-and-above" style="margin-bottom: 0px;margin-top: 0px;">1.18 and newer</label></input>
             </li>
           </ul> 

@@ -579,7 +579,10 @@ function toggleDarkmode() {
 function checkSite(window) {
   let search = window.location.search;
   if(typeof search !== "undefined" && search.length > 0) {
-    let parts = atob(search.slice(1)).split("&");
+    let parts = [];
+    try{
+      parts = atob(search.slice(1)).split("&");
+    }catch(e) {}
     //console.log(parts);
     for(let part of parts) {
       let [k,v] = part.split("=");

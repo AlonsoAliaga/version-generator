@@ -68,20 +68,24 @@
               <label for="1_8_8-1_12_2" style="margin-bottom: 0px;margin-top: 0px;">1.8.8 ➤ 1.12.2</label></input>
             </li>
             <li>
-              <input class="button-solid" type="checkbox" id="1_9-and-above" onclick="markBetween('1.9','1.19.4',true); this.checked = false">
+              <input class="button-solid" type="checkbox" id="1_9-and-above" onclick="markToHighest('1.9',true); this.checked = false">
               <label for="1_9-and-above" style="margin-bottom: 0px;margin-top: 0px;">1.9 and newer</label></input>
             </li>
             <li>
-              <input class="button-solid" type="checkbox" id="1_12_2_and-above" onclick="markBetween('1.12.2','1.19.4',true); this.checked = false">
+              <input class="button-solid" type="checkbox" id="1_12_2_and-above" onclick="markToHighest('1.12.2',true); this.checked = false">
               <label for="1_12_2_and-above" style="margin-bottom: 0px;margin-top: 0px;">1.12.2 and newer</label></input>
             </li>
             <li>
-              <input class="button-solid" type="checkbox" id="1_16_4-and-above" onclick="markBetween('1.16.4 ➤ 1.16.5','1.19.4',true); this.checked = false">
+              <input class="button-solid" type="checkbox" id="1_16_4-and-above" onclick="markToHighest('1.16.4 ➤ 1.16.5',true); this.checked = false">
               <label for="1_16_4-and-above" style="margin-bottom: 0px;margin-top: 0px;">1.16.4 and newer</label></input>
             </li>
             <li>
-              <input class="button-solid" type="checkbox" id="1_18-and-above" onclick="markBetween('1.18 ➤ 1.18.1','1.19.4',true); this.checked = false">
+              <input class="button-solid" type="checkbox" id="1_18-and-above" onclick="markToHighest('1.18 ➤ 1.18.1',true); this.checked = false">
               <label for="1_18-and-above" style="margin-bottom: 0px;margin-top: 0px;">1.18 and newer</label></input>
+            </li>
+            <li>
+              <input class="button-solid" type="checkbox" id="1_19-and-above" onclick="markToHighest('1.19',true); this.checked = false">
+              <label for="1_19-and-above" style="margin-bottom: 0px;margin-top: 0px;">1.19 and newer</label></input>
             </li>
           </ul> 
         </fieldset>
@@ -107,6 +111,7 @@
           <h2 style="font-size: 18px; font-family: MinecraftBold;">More tools for you:</h2>
           <div style="text-align: left;font-size: 20px;">
             <span>💠</span> <span class="rainbow" style="color:transparent"><a href="http://alonsoaliaga.github.io/generator">HEX Generator (RBG)</a></span><br>
+            <span>💠</span> <span><a href="http://alonsoaliaga.github.io/mcpfp">Pixel Art Minecraft Profile Picture Generator</a></span><br>
             <span>💠</span> <span><a href="http://alonsoaliaga.github.io/font-generator">Font Generator</a></span><br>
             <span>💠</span> <span><a href="http://alonsoaliaga.github.io/config-comparator">Config Comparator Updater</a></span><br>
             <span>💠</span> <span><a href="http://alonsoaliaga.github.io/yaml-parser">YAML/JSON Parser</a></span><br>

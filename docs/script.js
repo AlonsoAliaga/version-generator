@@ -118,6 +118,10 @@ const protocols = {
   },
   "1.19.4": {
     "number": 762,
+  },
+  "1.20 ➤ 1.20.1": {
+    "number": 763,
+    "versions": ["1.20","1.20.1"],
   }
 }
 createTableVersion();
@@ -148,16 +152,31 @@ function copyTextToClipboard(text) {
   alertCopied();
   document.body.removeChild(textArea);
 }
-function markBetween(min,max,blacklist) {
+function markBetween(min,max,whitelist) {
   let minNumber = protocols[min].number;
   let maxNumber = protocols[max].number;
   let whitelistMode = document.getElementById(`whitelist-mode`);
-  if(whitelistMode) whitelistMode.checked = blacklist;
+  if(whitelistMode) whitelistMode.checked = whitelist;
   for(let version of Object.keys(protocols)) {
     let versionOption = document.getElementById(`${version}-option`);
     if(versionOption) {
       let number = protocols[version].number;
-      if(minNumber > number && number < maxNumber)
+      if(number >= minNumber && number <= maxNumber)
+        versionOption.checked = true;
+      else versionOption.checked = false;
+    }
+  }
+  updateResult();
+}
+function markToHighest(min,whitelist) {
+  let minNumber = protocols[min].number;
+  let whitelistMode = document.getElementById(`whitelist-mode`);
+  if(whitelistMode) whitelistMode.checked = whitelist;
+  for(let version of Object.keys(protocols)) {
+    let versionOption = document.getElementById(`${version}-option`);
+    if(versionOption) {
+      let number = protocols[version].number;
+      if(minNumber > number)
         versionOption.checked = false;
       else versionOption.checked = true;
     }

@@ -256,9 +256,6 @@ function toggleDarkmode() {
       document.body.classList.add('dark');
       document.getElementById('result').classList.add("darktextboxes");
       
-      document.getElementById('output-indentation').classList.remove("lightbuttonboxes");
-      document.getElementById('output-indentation').classList.add("darkbuttonboxes");
-      
       document.getElementById('appearance').classList.remove("lightbuttonboxes");
       document.getElementById('appearance').classList.add("darkbuttonboxes");
       let success = document.getElementById('success_message');
@@ -270,8 +267,6 @@ function toggleDarkmode() {
       document.body.classList.remove('dark');
       document.getElementById('result').classList.remove("darktextboxes");
       //Buttons
-      document.getElementById('output-indentation').classList.remove("darkbuttonboxes");
-      document.getElementById('output-indentation').classList.add("lightbuttonboxes");
 
       document.getElementById('appearance').classList.remove("darkbuttonboxes");
       document.getElementById('appearance').classList.add("lightbuttonboxes");

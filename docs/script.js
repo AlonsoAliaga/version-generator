@@ -183,6 +183,21 @@ function markToHighest(min,whitelist) {
   }
   updateResult();
 }
+function markToLowest(max,whitelist) {
+  let maxNumber = protocols[max].number;
+  let whitelistMode = document.getElementById(`whitelist-mode`);
+  if(whitelistMode) whitelistMode.checked = whitelist;
+  for(let version of Object.keys(protocols)) {
+    let versionOption = document.getElementById(`${version}-option`);
+    if(versionOption) {
+      let number = protocols[version].number;
+      if(maxNumber < number)
+        versionOption.checked = false;
+      else versionOption.checked = true;
+    }
+  }
+  updateResult();
+}
 function markAll() {
   for(let version of Object.keys(protocols)) {
     let versionOption = document.getElementById(`${version}-option`);
@@ -201,6 +216,9 @@ function unmarkAll() {
   }
   updateResult();
 }
+const wsiiData = document.getElementById("wsii-data");
+let currentBlockedProtocols = [];
+let allowedProtocols = [];
 function updateResult() {
   let result = document.getElementById('result');
   if(result) {
@@ -210,12 +228,16 @@ function updateResult() {
     let thelegend = document.getElementById('thelegend');
     if(thelegend)
       thelegend.innerHTML = `&nbsp;&nbsp;&nbsp;Select versions to <span style="color: ${whitelistMode?"#4bad13":"#fc5044"}">${whitelistMode?"whitelist":"blacklist"}</span>&nbsp;&nbsp;&nbsp;`;
+    currentBlockedProtocols = [];
+    allowedProtocols = [];
+    allowedVersions = [];
     for(let version of Object.keys(protocols)) {
       let versionOption = document.getElementById(`${version}-option`);
       if(versionOption) {
         let data = protocols[version];
         if(whitelistMode) {
           if(!versionOption.checked) {
+            currentBlockedProtocols.push(data.number);
             if(versionMode) {
               if(data.versions && data.versions.length >= 1) {
                 for(let a of data.versions) {
@@ -230,6 +252,7 @@ function updateResult() {
           }
         }else{
           if(versionOption.checked) {
+            currentBlockedProtocols.push(data.number);
             if(versionMode) {
               if(data.versions && data.versions.length >= 1) {
                 for(let a of data.versions) {
@@ -246,18 +269,288 @@ function updateResult() {
       }
     }
     result.innerHTML = `block-${versionMode?"versions":"protocols"}: [${list.join(", ")}]`;
+    for(let version of Object.keys(protocols)) {
+      let data = protocols[version];
+      if(!currentBlockedProtocols.includes(data.number)) {
+        allowedProtocols.push(data.number);
+        if(typeof data.versions != "undefined") {
+          allowedVersions = allowedVersions.concat(data.versions);
+        }else {
+          allowedVersions.push(version);
+        }
+      }
+    }
+    if(document.getElementById("wsii").checked) {
+      updateWhatShouldIInstallData();
+    }
   }
 }
 function test() {
   console.log("TESTING WORKS!")
 }
+function toggleWhatShouldIInstall() {
+  let wsiiDiv = document.getElementById("what-should-i-install-div");
+  if (document.getElementById('wsii').checked) {
+    //wsii is enabled
+    wsiiDiv.style.display = "inline";
+    updateWhatShouldIInstallData();
+  }else{
+    //wsii is disabled
+    wsiiDiv.style.display = "none";
+  }
+}
+function updateWhatShouldIInstallData() {
+  //console.log(`Updating WhatShouldIInstall data..`);
+  let wsiiOption = document.getElementById("select-server-version");
+  //console.log(`Selected is ${wsiiOption.value}`);
+  //console.log(`Allowed protocols: [${allowedProtocols.join(", ")}]`)
+  //console.log(`Allowed versions: [${allowedVersions.join(", ")}]`)
+  if(!wsiiOption.value || wsiiOption.value == "none" || typeof serverVersions[wsiiOption.value] == "undefined") {
+    wsiiData.innerText = ``
+  }else{
+    let versionData = serverVersions[wsiiOption.value];
+    let protocol = versionData.protocol;
+    let useViaRewind = false;
+    let useViaBackwards = false;
+    if(allowedProtocols.length == 0) {
+      wsiiData.innerText = `\nYou don't need anything!\nBut players won't be able to connect..`
+    }else if(allowedProtocols.length == 1 && allowedProtocols[0] == protocol) {
+      wsiiData.innerText = `\nYou don't need anything!\nPlayers can connect without issues!`
+    }else{
+      if(protocol >= 107) { //Server 1.9+
+        useViaRewind = [4,5].some(p=> allowedProtocols.includes(p));
+        for(let allowedProtocol of allowedProtocols) {
+          if(allowedProtocol > 5) {
+            if(allowedProtocol < protocol) {
+              useViaBackwards = true;
+            }
+          }
+        }
+      }else{//Server 1.8
+        useViaRewind = allowedProtocols.includes(4);
+      }
+      if(!useViaRewind && !useViaBackwards) {
+        wsiiData.innerText = `\nYou only need ViaVersion!`
+      }else{
+        let text = `\nRemember you must have ViaVersion!`
+        if(useViaRewind) text = text + `\nYou must have ViaRewind installed!`
+        if(useViaBackwards) text = text + `\nYou must have ViaBackwards installed!`
+        wsiiData.innerText = text;
+      }
+    }
+  }
+}
+let serverVersions = {
+  "1.8.x": {
+    protocol: 47,
+    name: "1.8.x"
+  },
+  "1.9": {
+    protocol: 107,
+    name: "1.9"
+  },
+  "1.9.1": {
+    protocol: 108,
+    name: "1.9.1"
+  },
+  "1.9.2": {
+    protocol: 109,
+    name: "1.9.2"
+  },
+  "1.9.3": {
+    protocol: 110,
+    name: "1.9.3"
+  },
+  "1.9.4": {
+    protocol: 110,
+    name: "1.9.4"
+  },
+  "1.10": {
+    protocol: 210,
+    name: "1.10"
+  },
+  "1.10.1": {
+    protocol: 210,
+    name: "1.10.1"
+  },
+  "1.10.2": {
+    protocol: 210,
+    name: "1.10.2"
+  },
+  "1.11": {
+    protocol: 315,
+    name: "1.11"
+  },
+  "1.11.1": {
+    protocol: 316,
+	name: "1.11.1"
+  },
+  "1.11.2": {
+    protocol: 316,
+	name: "1.11.2"
+  },
+  "1.12": {
+    protocol: 335,
+	name: "1.12"
+  },
+  "1.12.1": {
+    protocol: 338,
+	name: "1.12.1"
+  },
+  "1.12.2": {
+    protocol: 340,
+	name: "1.12.2"
+  },
+  "1.13": {
+    protocol: 393,
+	name: "1.13"
+  },
+  "1.13.1": {
+    protocol: 401,
+	name: "1.13.1"
+  },
+  "1.13.2": {
+    protocol: 404,
+	name: "1.13.2"
+  },
+  "1.14": {
+    protocol: 477,
+	name: "1.14"
+  },
+  "1.14.1": {
+    protocol: 480,
+	name: "1.14.1"
+  },
+  "1.14.2": {
+    protocol: 485,
+	name: "1.14.2"
+  },
+  "1.14.3": {
+    protocol: 490,
+	name: "1.14.3"
+  },
+  "1.14.4": {
+    protocol: 498,
+	name: "1.14.4"
+  },
+  "1.15": {
+    protocol: 573,
+	name: "1.15"
+  },
+  "1.15.1": {
+    protocol: 575,
+	name: "1.15.1"
+  },
+  "1.15.2": {
+    protocol: 578,
+	name: "1.15.2"
+  },
+  "1.16": {
+    protocol: 735,
+	name: "1.16"
+  },
+  "1.16.1": {
+    protocol: 736,
+	name: "1.16.1"
+  },
+  "1.16.2": {
+    protocol: 751,
+	name: "1.16.2"
+  },
+  "1.16.3": {
+    protocol: 753,
+	name: "1.16.3"
+  },
+  "1.16.4": {
+    protocol: 754,
+	name: "1.16.4"
+  },
+  "1.16.5": {
+    protocol: 754,
+	name: "1.16.5"
+  },
+  "1.17": {
+    protocol: 755,
+	name: "1.17"
+  },
+  "1.17.1": {
+    protocol: 756,
+	name: "1.17.1"
+  },
+  "1.18": {
+    protocol: 757,
+	name: "1.18"
+  },
+  "1.18.1": {
+    protocol: 757,
+	name: "1.18.1"
+  },
+  "1.18.2": {
+    protocol: 758,
+	  name: "1.18.2"
+  },
+  "1.19": {
+    protocol: 759,
+	name: "1.19"
+  },
+  "1.19.1": {
+    protocol: 760,
+	name: "1.19.1"
+  },
+  "1.19.2": {
+    protocol: 760,
+	name: "1.19.2"
+  },
+  "1.19.3": {
+    protocol: 761,
+	name: "1.19.3"
+  },
+  "1.19.4": {
+    protocol: 762,
+	name: "1.19.4"
+  },
+  "1.20": {
+    protocol: 763,
+	name: "1.20"
+  },
+  "1.20.1": {
+    protocol: 763,
+	name: "1.20.1"
+  }
+}
+loadServerVersions();
+function loadServerVersions() {
+  //console.log(`Loading server version..`);
+  let select = document.getElementById('select-server-version');
+  if(select) {
+    for(let value of Object.keys(serverVersions)) {
+      let versionData = serverVersions[value];
+      if(versionData.name && versionData.name.length > 0) {
+        //console.log(`Adding ${versionData.name} with value ${value}`);
+        let option = document.createElement('option');
+        option.innerHTML = versionData.name;
+        option.style.textAlign = "center";
+        option.setAttribute("value",`${value}`);
+        if(value == "none") option.setAttribute("disabled",`disabled`);
+        select.appendChild(option);
+      }
+    }
+    select.value = "none";
+  }
+}
+let bottons = ["appearance-darkmode","appearance-wsii"]
 function toggleDarkmode() {
     if (document.getElementById('darkmode').checked == true) {
       document.body.classList.add('dark');
       document.getElementById('result').classList.add("darktextboxes");
-      
-      document.getElementById('appearance').classList.remove("lightbuttonboxes");
-      document.getElementById('appearance').classList.add("darkbuttonboxes");
+      for (let bID of bottons) {
+        let b = document.getElementById(bID);
+        if(b) {
+          b.classList.remove("lightbuttonboxes");
+          b.classList.add("darkbuttonboxes");
+        }
+      }
+      document.getElementById("select-server-version").classList.add("dark");
       let success = document.getElementById('success_message');
       if(success) {
         success.classList.remove("successlight");
@@ -267,9 +560,14 @@ function toggleDarkmode() {
       document.body.classList.remove('dark');
       document.getElementById('result').classList.remove("darktextboxes");
       //Buttons
-
-      document.getElementById('appearance').classList.remove("darkbuttonboxes");
-      document.getElementById('appearance').classList.add("lightbuttonboxes");
+      for (let bID of bottons) {
+        let b = document.getElementById(bID);
+        if(b) {
+          b.classList.remove("darkbuttonboxes");
+          b.classList.add("lightbuttonboxes");
+        }
+      }
+      document.getElementById("select-server-version").classList.remove("dark");
       let success = document.getElementById('success_message');
       if(success) {
         success.classList.remove("successdark");
@@ -279,6 +577,29 @@ function toggleDarkmode() {
     //console.log("Dark mode is now: "+(document.getElementById('darkmode').checked))
 }
 function checkSite(window) {
+  let search = window.location.search;
+  if(typeof search !== "undefined" && search.length > 0) {
+    let parts = atob(search.slice(1)).split("&");
+    //console.log(parts);
+    for(let part of parts) {
+      let [k,v] = part.split("=");
+      if(k == atob("YmV0YQ==")) {
+        let wsiiDiv = document.getElementById("appearance-wsii");
+        if(wsiiDiv && v == "true") {
+          wsiiDiv.style.display = "inline-block"
+        }
+      }else if(k == atob("d3NpaQ==")) {
+        let wsiiOption = document.getElementById("wsii")
+        if(wsiiOption && v == "true") {
+          wsiiOption.checked = true;
+          let wsiiDiv = document.getElementById("what-should-i-install-div");
+          if(wsiiDiv) {
+            wsiiDiv.style.display = "inline-block"
+          }
+        }
+      } 
+    }
+  }
   setTimeout(()=>{
     let href = window.location.href;
     if(!href.includes(atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw=="))) {

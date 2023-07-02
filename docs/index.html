@@ -22,9 +22,13 @@
       <div class="header">
         <h1 style="font-family: MinecraftBold;"><a href="https://alonsoaliaga.com/ViaVersion" rel="noopener" target="_blank">ViaVersion</a> Protocol Generator</h1>
         <span style="font-family: MinecraftBold;">Options:</span>
-        <div id="appearance" style="display: inline-block;font-family: MinecraftBold;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
+        <div id="appearance-darkmode" style="display: inline-block;font-family: MinecraftBold;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
           <input type="checkbox" checked id="darkmode" onclick="toggleDarkmode();"></input>
           <label for="darkmode" style="margin-bottom: 0px;margin-top: 0px;"> Dark Mode 👁‍🗨</label>
+        </div>
+        <div id="appearance-wsii" style="display: none;font-family: MinecraftBold;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
+          <input type="checkbox" id="wsii" onclick="toggleWhatShouldIInstall();"></input>
+          <label for="wsii" style="margin-bottom: 0px;margin-top: 0px;"> What Should I Install? 💬</label>
         </div>
         <br>
         <br>
@@ -35,6 +39,19 @@
       </div>
       <span id="snackbar"><b>💎 Successfully Copied! 💎</b><br><span style="font-size: small;">Thanks for using our tool!</span></span>
       <br>
+      <div style="display: none;" id="what-should-i-install-div">
+        <div class="options"> 
+          <label for="select-server-version">Select your server version: </label>
+          <select id="select-server-version"
+                  style="padding: 5px 5px 5px 5px;border-radius: 5px"
+                  class="form-control darktextboxes"
+                  onchange="updateWhatShouldIInstallData();">
+          </select>
+          <div id="wsii-data">
+            You shouldn't be reading this.. 🙄
+          </div>
+        </div><br>
+      </div>
       <div class="options">
         <div id="table">
           <input type="checkbox" id="version-mode" onclick="updateResult();"></input>

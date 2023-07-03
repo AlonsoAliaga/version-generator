@@ -26,7 +26,7 @@
           <input type="checkbox" checked id="darkmode" onclick="toggleDarkmode();"></input>
           <label for="darkmode" style="margin-bottom: 0px;margin-top: 0px;"> Dark Mode 👁‍🗨</label>
         </div>
-        <div id="appearance-wsii" style="display: none;font-family: MinecraftBold;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
+        <div id="appearance-wsii" style="display: inline-block;font-family: MinecraftBold;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
           <input type="checkbox" id="wsii" onclick="toggleWhatShouldIInstall();"></input>
           <label for="wsii" style="margin-bottom: 0px;margin-top: 0px;"> What Should I Install? 💬</label>
         </div>
@@ -41,7 +41,8 @@
       <br>
       <div style="display: none;" id="what-should-i-install-div">
         <div class="options" style="padding: 10px 50px 10px 50px;">
-          <span class="rainbow" style="font-size: 30px !important;color:transparent"><a href="http://alonsoaliaga.github.io/version-generator">Which plugin should I install?</a></span><br>
+          <span class="rainbow" style="font-size: 30px !important;color:transparent"><a href="http://alonsoaliaga.github.io/version-generator">Which plugin should I install?</a></span>
+          <span style="font-size: 15px !important;"><br>This function is still in BETA, report issues <a href="http://alonsoaliaga.com/discord">here</a>!</span><br><br>
           <label for="select-server-version">Select your server version: </label>
           <select id="select-server-version"
                   style="padding: 5px 5px 5px 5px;border-radius: 5px"
@@ -57,7 +58,7 @@
         <div id="table">
           <input type="checkbox" id="version-mode" onclick="updateResult();"></input>
           <label for="version-mode" style="margin-bottom: 0px;margin-top: 0px;"> Version Mode 🎉</label>
-          <input type="checkbox" id="whitelist-mode" onclick="updateResult();"></input>
+          <input type="checkbox" checked id="whitelist-mode" onclick="updateResult();"></input>
           <label for="whitelist-mode" style="margin-bottom: 0px;margin-top: 0px;"> Whitelist Mode 🏆</label>
         </div><br>
         <fieldset class="group"> 

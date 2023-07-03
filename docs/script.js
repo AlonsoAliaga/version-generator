@@ -299,13 +299,14 @@ function toggleWhatShouldIInstall() {
     wsiiDiv.style.display = "none";
   }
 }
+let pluginsSize = 100;
 function updateWhatShouldIInstallData() {
   //console.log(`Updating WhatShouldIInstall data..`);
   let wsiiOption = document.getElementById("select-server-version");
   //console.log(`Selected is ${wsiiOption.value}`);
   //console.log(`Allowed protocols: [${allowedProtocols.join(", ")}]`)
   //console.log(`Allowed versions: [${allowedVersions.join(", ")}]`)
-  if(!wsiiOption.value || wsiiOption.value == "none" || typeof serverVersions[wsiiOption.value] == "undefined") {
+  if(!wsiiOption.value || wsiiOption.value == "none" || wsiiOption.value.includes("separator") || typeof serverVersions[wsiiOption.value] == "undefined") {
     wsiiData.innerText = ``
   }else{
     let versionData = serverVersions[wsiiOption.value];
@@ -337,10 +338,12 @@ function updateWhatShouldIInstallData() {
     }else{
       if(protocol >= 107) { //Server 1.9+
         useViaRewind = [4,5].some(p=> allowedProtocols.includes(p));
-        for(let allowedProtocol of allowedProtocols) {
-          if(allowedProtocol > 5) {
-            if(allowedProtocol < protocol) {
-              useViaBackwards = true;
+        if(protocol >= 210) {//Server 1.10+
+          for(let allowedProtocol of allowedProtocols) {
+            if(allowedProtocol > 5) {
+              if(allowedProtocol < protocol) {
+                useViaBackwards = true;
+              }
             }
           }
         }
@@ -359,8 +362,8 @@ function updateWhatShouldIInstallData() {
         let link = document.createElement('a');
         link.href = 'https://alonsoaliaga.com/ViaVersion';
         let image = document.createElement('img');
-        image.width = 150;
-        image.height = 150;
+        image.width = pluginsSize;
+        image.height = pluginsSize;
         image.src = 'https://i.imgur.com/LfOXpEw.png';
         link.appendChild(image);
         wsiiData.appendChild(link);
@@ -376,8 +379,8 @@ function updateWhatShouldIInstallData() {
         let linkVV = document.createElement('a');
         linkVV.href = 'https://alonsoaliaga.com/ViaVersion';
         let imageVV = document.createElement('img');
-        imageVV.width = 150;
-        imageVV.height = 150;
+        imageVV.width = pluginsSize;
+        imageVV.height = pluginsSize;
         imageVV.src = 'https://i.imgur.com/LfOXpEw.png';
         linkVV.appendChild(imageVV);
         wsiiData.appendChild(document.createElement("br"));
@@ -395,12 +398,22 @@ function updateWhatShouldIInstallData() {
           let link = document.createElement('a');
           link.href = 'https://alonsoaliaga.com/ViaRewind';
           let image = document.createElement('img');
-          image.width = 150;
-          image.height = 150;
+          image.width = pluginsSize;
+          image.height = pluginsSize;
           image.src = 'https://i.imgur.com/pXBuYb1.png';
           image.style.padding = "0px 5px 0px 5px";
           link.appendChild(image);
           wsiiData.appendChild(link);
+
+          let link2 = document.createElement('a');
+          link2.href = 'https://hangar.papermc.io/ViaVersion/ViaRewindLegacySupport';
+          let image2 = document.createElement('img');
+          image2.width = pluginsSize;
+          image2.height = pluginsSize;
+          image2.src = 'https://www.spigotmc.org/data/resource_icons/52/52924.jpg';
+          image2.style.padding = "0px 5px 0px 5px";
+          link2.appendChild(image2);
+          wsiiData.appendChild(link2);
         }
         if(useViaBackwards) {
           if(!useViaRewind) installed += `ViaBackwards`
@@ -408,8 +421,8 @@ function updateWhatShouldIInstallData() {
           let link = document.createElement('a');
           link.href = 'https://alonsoaliaga.com/ViaBackwards';
           let image = document.createElement('img');
-          image.width = 150;
-          image.height = 150;
+          image.width = pluginsSize;
+          image.height = pluginsSize;
           image.src = 'https://i.imgur.com/WloyIUh.png';
           image.style.padding = "0px 5px 0px 5px";
           link.appendChild(image);
@@ -422,11 +435,20 @@ function updateWhatShouldIInstallData() {
 }
 let serverVersions = {
   "none": {
-    name: "Click here"
+    name: "Click here",
+    disabled: true
+  },
+  "1.8.x-separator": {
+    name: "1.8.x 🐰",
+    disabled: true
   },
   "1.8.x": {
     protocol: 47,
     name: "1.8.x"
+  },
+  "1.9-separator": {
+    name: "1.9 🛡️",
+    disabled: true
   },
   "1.9": {
     protocol: 107,
@@ -448,6 +470,10 @@ let serverVersions = {
     protocol: 110,
     name: "1.9.4"
   },
+  "1.10-separator": {
+    name: "1.10 ❄️",
+    disabled: true
+  },
   "1.10": {
     protocol: 210,
     name: "1.10"
@@ -460,6 +486,10 @@ let serverVersions = {
     protocol: 210,
     name: "1.10.2"
   },
+  "1.11-separator": {
+    name: "1.11 🗺️",
+    disabled: true
+  },
   "1.11": {
     protocol: 315,
     name: "1.11"
@@ -471,6 +501,10 @@ let serverVersions = {
   "1.11.2": {
     protocol: 316,
 	  name: "1.11.2"
+  },
+  "1.12-separator": {
+	  name: "1.12 🦜",
+    disabled: true
   },
   "1.12": {
     protocol: 335,
@@ -488,6 +522,10 @@ let serverVersions = {
     protocol: 393,
 	  name: "1.13"
   },
+  "1.13-separator": {
+	  name: "1.13 🐢",
+    disabled: true
+  },
   "1.13.1": {
     protocol: 401,
 	  name: "1.13.1"
@@ -499,6 +537,10 @@ let serverVersions = {
   "1.14": {
     protocol: 477,
 	  name: "1.14"
+  },
+  "1.14-separator": {
+	  name: "1.14 🏗️",
+    disabled: true
   },
   "1.14.1": {
     protocol: 480,
@@ -520,6 +562,10 @@ let serverVersions = {
     protocol: 573,
 	  name: "1.15"
   },
+  "1.15-separator": {
+	  name: "1.15 🐝",
+    disabled: true
+  },
   "1.15.1": {
     protocol: 575,
 	  name: "1.15.1"
@@ -531,6 +577,10 @@ let serverVersions = {
   "1.16": {
     protocol: 735,
 	  name: "1.16"
+  },
+  "1.16-separator": {
+	  name: "1.16 ⛏️",
+    disabled: true
   },
   "1.16.1": {
     protocol: 736,
@@ -556,6 +606,10 @@ let serverVersions = {
     protocol: 755,
 	  name: "1.17"
   },
+  "1.17-separator": {
+	  name: "1.17 🪔",
+    disabled: true
+  },
   "1.17.1": {
     protocol: 756,
 	  name: "1.17.1"
@@ -563,6 +617,10 @@ let serverVersions = {
   "1.18": {
     protocol: 757,
 	  name: "1.18"
+  },
+  "1.18-separator": {
+	  name: "1.18 🗻",
+    disabled: true
   },
   "1.18.1": {
     protocol: 757,
@@ -575,6 +633,10 @@ let serverVersions = {
   "1.19": {
     protocol: 759,
 	  name: "1.19"
+  },
+  "1.19-separator": {
+	  name: "1.19 🐸",
+    disabled: true
   },
   "1.19.1": {
     protocol: 760,
@@ -591,6 +653,10 @@ let serverVersions = {
   "1.19.4": {
     protocol: 762,
 	  name: "1.19.4"
+  },
+  "1.20-separator": {
+	  name: "1.20 🐪",
+    disabled: true
   },
   "1.20": {
     protocol: 763,
@@ -615,8 +681,10 @@ function loadServerVersions() {
         option.style.textAlign = "center";
         option.setAttribute("value",`${value}`);
         if(value == "none") {
-          option.setAttribute("disabled",true);
           option.setAttribute("selected",true);
+        }
+        if(versionData.disabled) {
+          option.setAttribute("disabled",true);
         }
         select.appendChild(option);
       }

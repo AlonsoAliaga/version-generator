@@ -227,7 +227,7 @@ function updateResult() {
     let whitelistMode = document.getElementById(`whitelist-mode`).checked;
     let thelegend = document.getElementById('thelegend');
     if(thelegend)
-      thelegend.innerHTML = `&nbsp;&nbsp;&nbsp;Select versions to <span style="color: ${whitelistMode?"#4bad13":"#fc5044"}">${whitelistMode?"whitelist":"blacklist"}</span>&nbsp;&nbsp;&nbsp;`;
+      thelegend.innerHTML = `&nbsp;&nbsp;&nbsp;Select client versions to <span style="color: ${whitelistMode?"#4bad13":"#fc5044"}">${whitelistMode?"whitelist":"blacklist"}</span>&nbsp;&nbsp;&nbsp;`;
     currentBlockedProtocols = [];
     allowedProtocols = [];
     allowedVersions = [];
@@ -313,9 +313,27 @@ function updateWhatShouldIInstallData() {
     let useViaRewind = false;
     let useViaBackwards = false;
     if(allowedProtocols.length == 0) {
-      wsiiData.innerText = `\nYou don't need anything!\nBut players won't be able to connect..`
+      wsiiData.innerHTML = ``
+      let span = document.createElement("span");
+      span.style.fontSize = "25px";
+      span.style.color = "#fc5044";
+      span.innerText = `If you block all versions players cannot join..`
+      wsiiData.appendChild(document.createElement("br"));
+      wsiiData.appendChild(span);
     }else if(allowedProtocols.length == 1 && allowedProtocols[0] == protocol) {
-      wsiiData.innerText = `\nYou don't need anything!\nPlayers can connect without issues!`
+      wsiiData.innerHTML = ``
+      let span = document.createElement("span");
+      span.style.fontSize = "25px";
+      span.style.color = "#fc5044";
+      span.innerText = `You don't need anything!`
+      let span2 = document.createElement("span");
+      span2.style.fontSize = "29px";
+      span2.style.color = "#32e140";
+      span2.innerText = `Players can join without issues!`
+      wsiiData.appendChild(document.createElement("br"));
+      wsiiData.appendChild(span);
+      wsiiData.appendChild(document.createElement("br"));
+      wsiiData.appendChild(span2);
     }else{
       if(protocol >= 107) { //Server 1.9+
         useViaRewind = [4,5].some(p=> allowedProtocols.includes(p));
@@ -330,12 +348,74 @@ function updateWhatShouldIInstallData() {
         useViaRewind = allowedProtocols.includes(4);
       }
       if(!useViaRewind && !useViaBackwards) {
-        wsiiData.innerText = `\nYou only need ViaVersion!`
+        wsiiData.innerHTML = ``
+        let span = document.createElement("span");
+        span.style.fontSize = "25px";
+        span.style.color = "#fc5044";
+        span.innerText = `You only need ViaVersion`
+        wsiiData.appendChild(document.createElement("br"));
+        wsiiData.appendChild(span);
+        wsiiData.appendChild(document.createElement("br"));
+        let link = document.createElement('a');
+        link.href = 'https://alonsoaliaga.com/ViaVersion';
+        let image = document.createElement('img');
+        image.width = 150;
+        image.height = 150;
+        image.src = 'https://i.imgur.com/LfOXpEw.png';
+        link.appendChild(image);
+        wsiiData.appendChild(link);
       }else{
-        let text = `\nRemember you must have ViaVersion!`
-        if(useViaRewind) text = text + `\nYou must have ViaRewind installed!`
-        if(useViaBackwards) text = text + `\nYou must have ViaBackwards installed!`
-        wsiiData.innerText = text;
+        wsiiData.innerHTML = ``
+        let spanVV = document.createElement("span");
+        spanVV.style.fontSize = "25px";
+        spanVV.style.color = "#fc5044";
+        spanVV.innerText = `Remember you must have ViaVersion!`
+        wsiiData.appendChild(document.createElement("br"));
+        wsiiData.appendChild(spanVV);
+        
+        let linkVV = document.createElement('a');
+        linkVV.href = 'https://alonsoaliaga.com/ViaVersion';
+        let imageVV = document.createElement('img');
+        imageVV.width = 150;
+        imageVV.height = 150;
+        imageVV.src = 'https://i.imgur.com/LfOXpEw.png';
+        linkVV.appendChild(imageVV);
+        wsiiData.appendChild(document.createElement("br"));
+        wsiiData.appendChild(linkVV);
+
+        let spanVP = document.createElement("span");
+        spanVP.style.fontSize = "25px";
+        spanVP.style.color = "#fc5044";
+        wsiiData.appendChild(document.createElement("br"));
+        wsiiData.appendChild(spanVP);
+        wsiiData.appendChild(document.createElement("br"));
+        let installed = "";
+        if(useViaRewind) {
+          installed += `ViaRewind`
+          let link = document.createElement('a');
+          link.href = 'https://alonsoaliaga.com/ViaRewind';
+          let image = document.createElement('img');
+          image.width = 150;
+          image.height = 150;
+          image.src = 'https://i.imgur.com/pXBuYb1.png';
+          image.style.padding = "0px 5px 0px 5px";
+          link.appendChild(image);
+          wsiiData.appendChild(link);
+        }
+        if(useViaBackwards) {
+          if(!useViaRewind) installed += `ViaBackwards`
+          else installed += ` and ViaBackwards`
+          let link = document.createElement('a');
+          link.href = 'https://alonsoaliaga.com/ViaBackwards';
+          let image = document.createElement('img');
+          image.width = 150;
+          image.height = 150;
+          image.src = 'https://i.imgur.com/WloyIUh.png';
+          image.style.padding = "0px 5px 0px 5px";
+          link.appendChild(image);
+          wsiiData.appendChild(link);
+        }
+        spanVP.innerText = `You must have ${installed} installed!`
       }
     }
   }
@@ -383,107 +463,107 @@ let serverVersions = {
   },
   "1.11.1": {
     protocol: 316,
-	name: "1.11.1"
+	  name: "1.11.1"
   },
   "1.11.2": {
     protocol: 316,
-	name: "1.11.2"
+	  name: "1.11.2"
   },
   "1.12": {
     protocol: 335,
-	name: "1.12"
+	  name: "1.12"
   },
   "1.12.1": {
     protocol: 338,
-	name: "1.12.1"
+	  name: "1.12.1"
   },
   "1.12.2": {
     protocol: 340,
-	name: "1.12.2"
+	  name: "1.12.2"
   },
   "1.13": {
     protocol: 393,
-	name: "1.13"
+	  name: "1.13"
   },
   "1.13.1": {
     protocol: 401,
-	name: "1.13.1"
+	  name: "1.13.1"
   },
   "1.13.2": {
     protocol: 404,
-	name: "1.13.2"
+	  name: "1.13.2"
   },
   "1.14": {
     protocol: 477,
-	name: "1.14"
+	  name: "1.14"
   },
   "1.14.1": {
     protocol: 480,
-	name: "1.14.1"
+	  name: "1.14.1"
   },
   "1.14.2": {
     protocol: 485,
-	name: "1.14.2"
+	  name: "1.14.2"
   },
   "1.14.3": {
     protocol: 490,
-	name: "1.14.3"
+	  name: "1.14.3"
   },
   "1.14.4": {
     protocol: 498,
-	name: "1.14.4"
+	  name: "1.14.4"
   },
   "1.15": {
     protocol: 573,
-	name: "1.15"
+	  name: "1.15"
   },
   "1.15.1": {
     protocol: 575,
-	name: "1.15.1"
+	  name: "1.15.1"
   },
   "1.15.2": {
     protocol: 578,
-	name: "1.15.2"
+	  name: "1.15.2"
   },
   "1.16": {
     protocol: 735,
-	name: "1.16"
+	  name: "1.16"
   },
   "1.16.1": {
     protocol: 736,
-	name: "1.16.1"
+	  name: "1.16.1"
   },
   "1.16.2": {
     protocol: 751,
-	name: "1.16.2"
+	  name: "1.16.2"
   },
   "1.16.3": {
     protocol: 753,
-	name: "1.16.3"
+	  name: "1.16.3"
   },
   "1.16.4": {
     protocol: 754,
-	name: "1.16.4"
+	  name: "1.16.4"
   },
   "1.16.5": {
     protocol: 754,
-	name: "1.16.5"
+	  name: "1.16.5"
   },
   "1.17": {
     protocol: 755,
-	name: "1.17"
+	  name: "1.17"
   },
   "1.17.1": {
     protocol: 756,
-	name: "1.17.1"
+	  name: "1.17.1"
   },
   "1.18": {
     protocol: 757,
-	name: "1.18"
+	  name: "1.18"
   },
   "1.18.1": {
     protocol: 757,
-	name: "1.18.1"
+	  name: "1.18.1"
   },
   "1.18.2": {
     protocol: 758,
@@ -491,31 +571,31 @@ let serverVersions = {
   },
   "1.19": {
     protocol: 759,
-	name: "1.19"
+	  name: "1.19"
   },
   "1.19.1": {
     protocol: 760,
-	name: "1.19.1"
+	  name: "1.19.1"
   },
   "1.19.2": {
     protocol: 760,
-	name: "1.19.2"
+	  name: "1.19.2"
   },
   "1.19.3": {
     protocol: 761,
-	name: "1.19.3"
+	  name: "1.19.3"
   },
   "1.19.4": {
     protocol: 762,
-	name: "1.19.4"
+	  name: "1.19.4"
   },
   "1.20": {
     protocol: 763,
-	name: "1.20"
+	  name: "1.20"
   },
   "1.20.1": {
     protocol: 763,
-	name: "1.20.1"
+	  name: "1.20.1"
   }
 }
 loadServerVersions();
@@ -589,7 +669,7 @@ function checkSite(window) {
       if(k == atob("YmV0YQ==")) {
         let wsiiDiv = document.getElementById("appearance-wsii");
         if(wsiiDiv && v == "true") {
-          wsiiDiv.style.display = "inline-block"
+          wsiiDiv.style.display = "inline"
         }
       }else if(k == atob("d3NpaQ==")) {
         let wsiiOption = document.getElementById("wsii")
@@ -597,7 +677,7 @@ function checkSite(window) {
           wsiiOption.checked = true;
           let wsiiDiv = document.getElementById("what-should-i-install-div");
           if(wsiiDiv) {
-            wsiiDiv.style.display = "inline-block"
+            wsiiDiv.style.display = "inline"
           }
         }
       } 

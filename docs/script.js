@@ -421,6 +421,9 @@ function updateWhatShouldIInstallData() {
   }
 }
 let serverVersions = {
+  "none": {
+    name: "Click here"
+  },
   "1.8.x": {
     protocol: 47,
     name: "1.8.x"
@@ -611,7 +614,10 @@ function loadServerVersions() {
         option.innerHTML = versionData.name;
         option.style.textAlign = "center";
         option.setAttribute("value",`${value}`);
-        if(value == "none") option.setAttribute("disabled",`disabled`);
+        if(value == "none") {
+          option.setAttribute("disabled",true);
+          option.setAttribute("selected",true);
+        }
         select.appendChild(option);
       }
     }

@@ -122,6 +122,13 @@ const protocols = {
   "1.20 ➤ 1.20.1": {
     "number": 763,
     "versions": ["1.20","1.20.1"],
+  },
+  "1.20.2": {
+    "number": 764,
+  },
+  "1.20.3 ➤ 1.20.4": {
+    "number": 765,
+    "versions": ["1.20.3","1.20.4"],
   }
 }
 createTableVersion();
@@ -665,6 +672,18 @@ let serverVersions = {
   "1.20.1": {
     protocol: 763,
 	  name: "1.20.1"
+  },
+  "1.20.2": {
+    protocol: 764,
+	  name: "1.20.1"
+  },
+  "1.20.3": {
+    protocol: 765,
+	  name: "1.20.3"
+  },
+  "1.20.4": {
+    protocol: 765,
+	  name: "1.20.4"
   }
 }
 loadServerVersions();

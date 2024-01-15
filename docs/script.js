@@ -176,6 +176,9 @@ function markBetween(min,max,whitelist) {
   updateResult();
 }
 function markToHighest(min,whitelist) {
+  if(typeof protocols[min] == "undefined") {
+    return;
+  }
   let minNumber = protocols[min].number;
   let whitelistMode = document.getElementById(`whitelist-mode`);
   if(whitelistMode) whitelistMode.checked = whitelist;

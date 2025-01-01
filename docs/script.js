@@ -711,6 +711,10 @@ let serverVersions = {
     protocol: 766,
 	  name: "1.20.6"
   },
+  "1.21-separator": {
+	  name: "1.21 🗝️",
+    disabled: true
+  },
   "1.21": {
     protocol: 767,
 	  name: "1.21"

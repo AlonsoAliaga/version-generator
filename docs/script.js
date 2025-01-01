@@ -702,6 +702,34 @@ let serverVersions = {
   "1.20.4": {
     protocol: 765,
 	  name: "1.20.4"
+  },
+  "1.20.5": {
+    protocol: 766,
+	  name: "1.20.5"
+  },
+  "1.20.6": {
+    protocol: 766,
+	  name: "1.20.6"
+  },
+  "1.21": {
+    protocol: 767,
+	  name: "1.21"
+  },
+  "1.21.1": {
+    protocol: 767,
+	  name: "1.21.1"
+  },
+  "1.21.2": {
+    protocol: 768,
+	  name: "1.21.2"
+  },
+  "1.21.3": {
+    protocol: 768,
+	  name: "1.21.3"
+  },
+  "1.21.4": {
+    protocol: 769,
+	  name: "1.21.4"
   }
 }
 loadServerVersions();

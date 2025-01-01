@@ -639,13 +639,13 @@ let serverVersions = {
     protocol: 756,
 	  name: "1.17.1"
   },
-  "1.18": {
-    protocol: 757,
-	  name: "1.18"
-  },
   "1.18-separator": {
 	  name: "1.18 🗻",
     disabled: true
+  },
+  "1.18": {
+    protocol: 757,
+	  name: "1.18"
   },
   "1.18.1": {
     protocol: 757,

@@ -129,7 +129,22 @@ const protocols = {
   "1.20.3 ➤ 1.20.4": {
     "number": 765,
     "versions": ["1.20.3","1.20.4"],
-  }
+  },
+  "1.20.5 ➤ 1.20.6": {
+    "number": 766,
+    "versions": ["1.20.5","1.20.6"],
+  },
+  "1.21 ➤ 1.21.1": {
+    "number": 767,
+    "versions": ["1.21","1.21.1"],
+  },
+  "1.21.2 ➤ 1.21.3": {
+    "number": 768,
+    "versions": ["1.21.2","1.21.3"],
+  },
+  "1.20.4": {
+    "number": 769,
+  },
 }
 createTableVersion();
 function createTableVersion() {

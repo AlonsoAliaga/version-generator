@@ -145,6 +145,9 @@ const protocols = {
   "1.21.4": {
     "number": 769,
   },
+  "1.21.5": {
+    "number": 770,
+  },
 }
 createTableVersion();
 function createTableVersion() {
@@ -178,7 +181,7 @@ function markBetween(min,max,whitelist) {
   let minNumber = protocols[min].number;
   let maxNumber = protocols[max].number;
   let whitelistMode = document.getElementById(`whitelist-mode`);
-  if(whitelistMode) whitelistMode.checked = whitelist;
+  if(typeof whitelist != "undefined" && whitelistMode) whitelistMode.checked = whitelist;
   for(let version of Object.keys(protocols)) {
     let versionOption = document.getElementById(`${version}-option`);
     if(versionOption) {
@@ -196,7 +199,7 @@ function markToHighest(min,whitelist) {
   }
   let minNumber = protocols[min].number;
   let whitelistMode = document.getElementById(`whitelist-mode`);
-  if(whitelistMode) whitelistMode.checked = whitelist;
+  if(typeof whitelist != "undefined" && whitelistMode) whitelistMode.checked = whitelist;
   for(let version of Object.keys(protocols)) {
     let versionOption = document.getElementById(`${version}-option`);
     if(versionOption) {
@@ -211,7 +214,7 @@ function markToHighest(min,whitelist) {
 function markToLowest(max,whitelist) {
   let maxNumber = protocols[max].number;
   let whitelistMode = document.getElementById(`whitelist-mode`);
-  if(whitelistMode) whitelistMode.checked = whitelist;
+  if(typeof whitelist != "undefined" && whitelistMode) whitelistMode.checked = whitelist;
   for(let version of Object.keys(protocols)) {
     let versionOption = document.getElementById(`${version}-option`);
     if(versionOption) {
@@ -252,7 +255,7 @@ function updateResult() {
     let whitelistMode = document.getElementById(`whitelist-mode`).checked;
     let thelegend = document.getElementById('thelegend');
     if(thelegend)
-      thelegend.innerHTML = `&nbsp;&nbsp;&nbsp;Select client versions to <span style="color: ${whitelistMode?"#4bad13":"#fc5044"}">${whitelistMode?"whitelist":"blacklist"}</span>&nbsp;&nbsp;&nbsp;`;
+      thelegend.innerHTML = `&nbsp;&nbsp;&nbsp;Select client versions to ${whitelistMode?`<span style="background-color:#ffffff;border-radius:5px;padding:5px 15px 5px 15px;color:#4bad13">WHITELIST</span>`:`<span style="background-color:#ffffff;border-radius:5px;padding:5px 15px 5px 15px;color:#fc5044">BLACKLIST</span>`}&nbsp;&nbsp;&nbsp;`;
     currentBlockedProtocols = [];
     allowedProtocols = [];
     allowedVersions = [];
@@ -734,6 +737,10 @@ let serverVersions = {
   "1.21.4": {
     protocol: 769,
 	  name: "1.21.4"
+  },
+  "1.21.5": {
+    protocol: 770,
+	  name: "1.21.5"
   }
 }
 loadServerVersions();
@@ -832,6 +839,23 @@ function checkSite(window) {
       try{document.title = `Page stolen from https://${atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw==")}`;}catch(e){}
       window.location = `https://${atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw==")}/version-generator/`}
   });
+  fetch('https://api.github.com/repos/AlonsoAliaga/AlonsoAliagaAPI/contents/api/tools/tools-list.json?ref=main')
+  .then(res => res.json())
+  .then(content => {
+    const decoded = atob(content.content);
+    const parsed = JSON.parse(decoded);
+    let toolsData = parsed;
+    let toolsArray = []
+    console.log(`Loading ${Object.keys(toolsData).length} tools..`);
+    for(let toolData of toolsData) {
+      //console.log(toolData);
+      let clazz = typeof toolData.clazz == "undefined" ? "" : ` class="${toolData.clazz}"`;
+      let style = typeof toolData.style == "undefined" ? "" : ` style="${toolData.style}"`;
+      toolsArray.push(`<span>💠</span> <span${clazz}${style}><a href="${toolData.link}">${toolData.name}</a></span><br>`);
+    }
+    document.getElementById("tools-for-you").innerHTML = toolsArray.join(`
+`);
+  });
 }
 
 let times = 0;
@@ -901,3 +925,33 @@ function alertCopied() {
   copiedTimeout = setTimeout(()=>{ sb.className = sb.className.replace("show", ""); }, 3000);
 }
 toggleDarkmode();
+document.addEventListener("DOMContentLoaded", () => {
+  checkSite(window);
+  loadCounter();
+  updateResult();
+});
+let adCuts = ["ad-1_7-1_8","ad-1_9_2-1_12_2","ad-1_16_4-and-above"]
+function lockCutsWithMessage(className,message,iconUrl='https://raw.githubusercontent.com/AlonsoAliaga/generator/main/assets/images/lock-icon.png') {
+  let elements = adCuts.map(n=>document.getElementById(n)).filter(Boolean);
+  for(let element of elements) {
+    element = element.parentElement;
+    if(!element) continue;
+    element.classList.add(className);
+    const ov = document.createElement('div');
+    ov.className = 'overlay';
+    ov.innerHTML = `<img src="${iconUrl}"><span>${message}</span>`;
+    element.append(ov);
+  }
+}
+function lockElementWithMessage(element,className,message,iconUrl='https://raw.githubusercontent.com/AlonsoAliaga/generator/main/assets/images/lock-icon.png') {
+  if(element) {
+    element.classList.add(className);
+    const ov = document.createElement('div');
+    ov.className = 'overlay';
+    ov.innerHTML = `<img src="${iconUrl}"><span>${message}</span>`;
+    element.append(ov);
+  }
+}
+function processAds() {
+  lockCutsWithMessage("adlocked",`Disable AdBlock for this shortcut!`)
+}

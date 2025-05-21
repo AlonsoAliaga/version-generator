@@ -17,10 +17,20 @@
     <meta property="og:description" content="Whilelist/blacklist protocols of ViaVersion easily!">
     <meta property="og:url" content="https://alonsoaliaga.github.io/index.html">
   </head>
-  <body onload="loadCounter(); checkSite(window); updateResult();">
+  <body>
     <div class="content">
       <div class="header">
         <h1 style="font-family: MinecraftBold;"><a href="https://alonsoaliaga.com/ViaVersion" rel="noopener" target="_blank">ViaVersion</a> Protocol Generator</h1>
+        <div class="options" style="padding: 10px 10px 10px 10px; margin-bottom: 10px;">
+          <h2 class="rainbow" style="font-size:25px; color:transparent">How is this different from other generators?</h2>
+          This generator allows server owners to easily setup ViaVersion with <b class="rainbow">many</b> predefined options.<br><br>
+          Additionally, our new brand feature tells you what Via plugins you require!<br>
+          Just click the option <b class="rainbow">What should I Install? 💬</b><br><br>
+          <h2 style="font-size: 20px; color: rgb(255, 71, 71)">Do not pay $10 to someone for something you can do yourself in minutes!</h2>
+          <span style="font-size: 17px;">
+            <b>⚠️ If you have cool ideas, suggest them in our <a href="https://alonsoaliaga.com/discord" rel="noopener" target="_blank">official discord server.</a></b><br>
+          </span>
+        </div>
         <span style="font-family: MinecraftBold;">Options:</span>
         <div id="appearance-darkmode" style="display: inline-block;font-family: MinecraftBold;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
           <input type="checkbox" checked id="darkmode" onclick="toggleDarkmode();"></input>
@@ -65,7 +75,9 @@
           <legend id="thelegend">&nbsp;&nbsp;&nbsp;Select client versions to &nbsp;&nbsp;&nbsp;</legend> 
           <ul id="table-protocols" class="checkbox">
             Loading..
-          </ul> 
+          </ul>
+          <span style="color: gray;font-weight: bold;font-size: 13px;">Cannot find a new version? Let us know on <a href="http://alonsoaliaga.com/discord">Discord</a> to add it!</span>
+          <span style="color: rgb(185, 87, 87);font-weight: bold;font-size: 13px;margin: 0px;">Only released versions can be added, not snapshots!</span>
         </fieldset><br>
         <fieldset class="group" style="padding-bottom: 15px;font-size: 18px;"> 
           <legend id="thelegend">&nbsp;&nbsp;&nbsp;Common options&nbsp;&nbsp;&nbsp;</legend> 
@@ -79,36 +91,48 @@
               <label for="unmark-all-option" style="margin-bottom: 0px;margin-top: 0px;">📛 Uncheck all</label></input>
             </li>
             <li>
-              <input class="button-solid" type="checkbox" id="1_7_6-1_8_9" onclick="markBetween('1.7.6 ➤ 1.7.10','1.8 ➤ 1.8.9',true); this.checked = false">
+              <input class="button-solid" type="checkbox" id="1_7_6-1_8_9" onclick="markBetween('1.7.6 ➤ 1.7.10','1.8 ➤ 1.8.9',undefined); this.checked = false">
               <label for="1_7_6-1_8_9" style="margin-bottom: 0px;margin-top: 0px;">1.7.10 ➤ 1.8.9</label></input>
             </li>
             <li>
-              <input class="button-solid" type="checkbox" id="1_8_8-1_12_2" onclick="markBetween('1.8 ➤ 1.8.9','1.12.2',true); this.checked = false">
+              <input class="button-solid" type="checkbox" id="1_8_8-1_12_2" onclick="markBetween('1.8 ➤ 1.8.9','1.12.2',undefined); this.checked = false">
               <label for="1_8_8-1_12_2" style="margin-bottom: 0px;margin-top: 0px;">1.8.8 ➤ 1.12.2</label></input>
             </li>
             <li>
-              <input class="button-solid" type="checkbox" id="1_9-and-above" onclick="markToHighest('1.9',true); this.checked = false">
+              <input class="button-solid" type="checkbox" id="1_9-and-above" onclick="markToHighest('1.9',undefined); this.checked = false">
               <label for="1_9-and-above" style="margin-bottom: 0px;margin-top: 0px;">1.9 and newer</label></input>
             </li>
             <li>
-              <input class="button-solid" type="checkbox" id="1_12_2_and-above" onclick="markToHighest('1.12.2',true); this.checked = false">
+              <input class="button-solid" type="checkbox" id="1_12_2_and-above" onclick="markToHighest('1.12.2',undefined); this.checked = false">
               <label for="1_12_2_and-above" style="margin-bottom: 0px;margin-top: 0px;">1.12.2 and newer</label></input>
             </li>
             <li>
-              <input class="button-solid" type="checkbox" id="1_16_4-and-above" onclick="markToHighest('1.16.4 ➤ 1.16.5',true); this.checked = false">
+              <input class="button-solid" type="checkbox" id="1_16_4-and-above" onclick="markToHighest('1.16.4 ➤ 1.16.5',undefined); this.checked = false">
               <label for="1_16_4-and-above" style="margin-bottom: 0px;margin-top: 0px;">1.16.4 and newer</label></input>
             </li>
             <li>
-              <input class="button-solid" type="checkbox" id="1_18-and-above" onclick="markToHighest('1.18 ➤ 1.18.1',true); this.checked = false">
+              <input class="button-solid" type="checkbox" id="1_18-and-above" onclick="markToHighest('1.18 ➤ 1.18.1',undefined); this.checked = false">
               <label for="1_18-and-above" style="margin-bottom: 0px;margin-top: 0px;">1.18 and newer</label></input>
             </li>
             <li>
-              <input class="button-solid" type="checkbox" id="1_19-and-above" onclick="markToHighest('1.19',true); this.checked = false">
+              <input class="button-solid" type="checkbox" id="1_19-and-above" onclick="markToHighest('1.19',undefined); this.checked = false">
               <label for="1_19-and-above" style="margin-bottom: 0px;margin-top: 0px;">1.19 and newer</label></input>
             </li>
             <li>
-              <input class="button-solid" type="checkbox" id="1_20-and-above" onclick="markToHighest('1.20 ➤ 1.20.1',true); this.checked = false">
+              <input class="button-solid" type="checkbox" id="1_20-and-above" onclick="markToHighest('1.20 ➤ 1.20.1',undefined); this.checked = false">
               <label for="1_20-and-above" style="margin-bottom: 0px;margin-top: 0px;">1.20 and newer</label></input>
+            </li>
+            <li>
+              <input class="button-solid" type="checkbox" id="ad-1_7-1_8" onclick="markBetween('1.8 ➤ 1.8.9','1.12.2',true); this.checked = false">
+              <label for="only-1_7-1_8" style="margin-bottom: 0px;margin-top: 0px;">Allow only 1.7.1 - 1.8.9</label></input>
+            </li>
+            <li>
+              <input class="button-solid" type="checkbox" id="ad-1_9_2-1_12_2" onclick="markBetween('1.9.0','1.12.2',true); this.checked = false">
+              <label for="only-1_9_2-1_12_2" style="margin-bottom: 0px;margin-top: 0px;">Allow only 1.9.0 - 1.12.2</label></input>
+            </li>
+            <li>
+              <input class="button-solid" type="checkbox" id="ad-1_16_4-and-above" onclick="markToHighest('1.16.4 ➤ 1.16.5',true); this.checked = false">
+              <label for="1_16_4-and-above" style="margin-bottom: 0px;margin-top: 0px;">Allow 1.16.4 and newer</label></input>
             </li>
           </ul> 
         </fieldset>
@@ -129,16 +153,30 @@
           </div>
         </div>
       </div> -->
+      <div style="justify-content: center;display: flex;">
+        <div class="center-container">
+          <fieldset class="group" style="display: flex; justify-content: center;border: 2px solid silver;padding: 0px;width: 300px;align-content: center;"> 
+            <legend style="text-align: center;width: 70%;padding: 0px 15px 5px 15px;" id="thelegend">Looking for a pixelart like this? 💎</legend> 
+            <img src="https://raw.githubusercontent.com/AlonsoAliaga/version-generator/main/assets/showcase/pixelart-showcase.png" style="height: 200px;padding-bottom: 0px;cursor: pointer;" onclick="window.open('https://alonsoaliaga.com/mcpfp', '_blank');">
+          </fieldset>
+        </div>&nbsp;&nbsp;
+        <div class="center-container">
+          <fieldset class="group" style="display: flex; justify-content: center;border: 2px solid silver;padding: 0px;width: 300px;align-content: center;"> 
+            <legend style="text-align: center;width: 70%;padding: 0px 15px 5px 15px;" id="thelegend">Looking for a render like this one? 💎</legend> 
+            <img src="https://raw.githubusercontent.com/AlonsoAliaga/version-generator/main/assets/showcase/render-showcase.png" style="height: 200px;padding-bottom: 0px;cursor: pointer;" onclick="window.open('https://alonsoaliaga.com/mc-render', '_blank');">
+          </fieldset>
+        </div>&nbsp;&nbsp;
+        <div class="center-container">
+          <fieldset class="group" style="display: flex; justify-content: center;border: 2px solid silver;padding: 0px;width: 300px;align-content: center;"> 
+            <legend style="text-align: center;width: 80%;padding: 0px 15px 5px 15px;" id="thelegend">Looking for an animation like this one? 💎</legend> 
+            <img src="https://raw.githubusercontent.com/AlonsoAliaga/version-generator/main/assets/showcase/skin-showcase.gif" style="height: 200px;padding-bottom: 0px;cursor: pointer;" onclick="window.open('https://alonsoaliaga.com/mc-skin', '_blank');">
+          </fieldset>
+        </div>
+      </div>
       <div>
-        <div style="font-size: 18px ;padding-top: 20px;padding-bottom: 20px; font-family: MinecraftRegular;" class="examples">
+        <div style="border-radius: 25px;font-size: 18px ;padding-top: 20px;padding-bottom: 20px; font-family: MinecraftRegular;" class="examples">
           <h2 style="font-size: 18px; font-family: MinecraftBold;">More tools for you:</h2>
-          <div style="text-align: left;font-size: 20px;">
-            <span>💠</span> <span class="rainbow" style="color:transparent"><a href="http://alonsoaliaga.github.io/generator">HEX Generator (RBG)</a></span><br>
-            <span>💠</span> <span><a href="http://alonsoaliaga.github.io/mcpfp">Pixel Art Minecraft Profile Picture Generator</a></span><br>
-            <span>💠</span> <span><a href="http://alonsoaliaga.github.io/font-generator">Font Generator</a></span><br>
-            <span>💠</span> <span><a href="http://alonsoaliaga.github.io/config-comparator">Config Comparator Updater</a></span><br>
-            <span>💠</span> <span><a href="http://alonsoaliaga.github.io/yaml-parser">YAML/JSON Parser</a></span><br>
-            <span>💠</span> <span><a href="http://alonsoaliaga.github.io/pretty-json">Pretty JSON</a></span>
+          <div style="text-align: left;font-size: 20px;" id="tools-for-you">
           </div>
           <br>
           <h2 style="color: transparent;font-size: 18px ;text-align: center; font-family: MinecraftBold;"><a href="https://alonsoaliaga.github.io" rel="noopener" target="_blank">AlonsoAliaga Development</a></h2>
@@ -147,7 +185,7 @@
       <div>
       <br>
       <div style="font-family: MinecraftBold;" class="footer">
-        Project made to make it easier to edit these options for <a href="http://alonsoaliaga.com/ViaVersion">ViaVersion</a>.
+        ❤️ Project to help owners to easily setup <a href="http://alonsoaliaga.com/ViaVersion">ViaVersion</a> for their servers.
       </div>
       <!-- <div id="mybutton">
         <button class="buttonface"><a href="https://alonsoaliaga.github.io"><img src="https://raw.githubusercontent.com/AlonsoAliaga/alonsoaliaga.github.io/main/assets/img/apple-touch-icon.png"></a></button>
@@ -165,13 +203,12 @@
     <script ></script>
   </div>
 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5185973148525065"
+   crossorigin="anonymous"></script>
   <!-- <script src="jquery-1.6.1.min.js"></script> -->
   <script src="script.js"></script>
   <script src="autoresize.jquery.min.js"></script>
   <!-- <script src="script.js"></script> -->
-  
-  <script>
-    
-  </script>
+  <script src="resources.js"></script>
   </body>
 </html>

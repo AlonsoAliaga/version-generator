@@ -931,7 +931,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateResult();
 });
 let adCuts = ["ad-1_7-1_8","ad-1_9_2-1_12_2","ad-1_16_4-and-above"]
-function lockCutsWithMessage(className,message,iconUrl='https://raw.githubusercontent.com/AlonsoAliaga/generator/main/assets/images/lock-icon.png') {
+function lockCutsWithMessage(className,message,iconUrl='https://raw.githubusercontent.com/AlonsoAliaga/version-generator/main/assets/images/lock-icon.png') {
   let elements = adCuts.map(n=>document.getElementById(n)).filter(Boolean);
   for(let element of elements) {
     element = element.parentElement;
@@ -943,7 +943,7 @@ function lockCutsWithMessage(className,message,iconUrl='https://raw.githubuserco
     element.append(ov);
   }
 }
-function lockElementWithMessage(element,className,message,iconUrl='https://raw.githubusercontent.com/AlonsoAliaga/generator/main/assets/images/lock-icon.png') {
+function lockElementWithMessage(element,className,message,iconUrl='https://raw.githubusercontent.com/AlonsoAliaga/version-generator/main/assets/images/lock-icon.png') {
   if(element) {
     element.classList.add(className);
     const ov = document.createElement('div');

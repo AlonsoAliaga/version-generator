@@ -148,6 +148,9 @@ const protocols = {
   "1.21.5": {
     "number": 770,
   },
+  "1.21.6": {
+    "number": 771,
+  },
 }
 createTableVersion();
 function createTableVersion() {
@@ -741,6 +744,10 @@ let serverVersions = {
   "1.21.5": {
     protocol: 770,
 	  name: "1.21.5"
+  },
+  "1.21.6": {
+    protocol: 771,
+	  name: "1.21.6"
   }
 }
 loadServerVersions();
@@ -972,7 +979,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },10000)
   },2500)
 });
-let adCuts = ["ad-1_7-1_8","ad-1_9_2-1_12_2","ad-1_16_4-and-above"]
+let adCuts = ["ad-1_7-1_8","ad-1_9_2-1_12_2","ad-1_16_4-and-above","ad-1_21-and-above"]
 function lockCutsWithMessage(className,message,iconUrl='https://raw.githubusercontent.com/AlonsoAliaga/version-generator/main/assets/images/lock-icon.png') {
   let elements = adCuts.map(n=>document.getElementById(n)).filter(Boolean);
   for(let element of elements) {

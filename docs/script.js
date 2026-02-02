@@ -151,6 +151,18 @@ const protocols = {
   "1.21.6": {
     "number": 771,
   },
+  "1.21.7 ➤ 1.21.8": {
+    protocol: 772,
+    "versions": ["1.21.7","1.21.8"],
+  },
+  "1.21.8": {
+    protocol: 772,
+	  name: "1.21.8"
+  },
+  "1.21.9 ➤ 1.21.10": {
+    protocol: 773,
+    "versions": ["1.21.9","1.21.10"],
+  }
 }
 createTableVersion();
 function createTableVersion() {
@@ -748,6 +760,22 @@ let serverVersions = {
   "1.21.6": {
     protocol: 771,
 	  name: "1.21.6"
+  },
+  "1.21.7": {
+    protocol: 772,
+	  name: "1.21.7"
+  },
+  "1.21.8": {
+    protocol: 772,
+	  name: "1.21.8"
+  },
+  "1.21.9": {
+    protocol: 773,
+	  name: "1.21.9"
+  },
+  "1.21.10": {
+    protocol: 773,
+	  name: "1.21.10"
   }
 }
 loadServerVersions();

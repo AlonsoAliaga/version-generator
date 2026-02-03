@@ -152,17 +152,15 @@ const protocols = {
     "number": 771,
   },
   "1.21.7 ➤ 1.21.8": {
-    protocol: 772,
+    "number": 772,
     "versions": ["1.21.7","1.21.8"],
   },
   "1.21.8": {
-    protocol: 772,
-	  name: "1.21.8"
+    "number": 772,
   },
   "1.21.9 ➤ 1.21.10": {
-    protocol: 773,
+    "number": 773,
     "versions": ["1.21.9","1.21.10"],
-  }
 }
 createTableVersion();
 function createTableVersion() {

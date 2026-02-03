@@ -161,6 +161,7 @@ const protocols = {
   "1.21.9 ➤ 1.21.10": {
     "number": 773,
     "versions": ["1.21.9","1.21.10"],
+  } 
 }
 createTableVersion();
 function createTableVersion() {

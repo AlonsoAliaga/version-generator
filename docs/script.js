@@ -1009,10 +1009,10 @@ document.addEventListener("DOMContentLoaded", () => {
       loadChecking();
     },10000)
   },2500)
+  setTimeout(()=>{
+    if(typeof window.getRandomStyle == "undefined" && myTimeout == undefined) processAds();
+  },2000)
 });
-setTimeout(()=>{
-  if(typeof window.getRandomStyle == "undefined" && myTimeout == undefined) processAds();
-},2000)
 let adCuts = ["ad-1_7-1_8","ad-1_9_2-1_12_2","ad-1_16_4-and-above","ad-1_21-and-above"]
 function lockCutsWithMessage(className,message,iconUrl='https://raw.githubusercontent.com/AlonsoAliaga/version-generator/main/assets/images/lock-icon.png') {
   let elements = adCuts.map(n=>document.getElementById(n)).filter(Boolean);

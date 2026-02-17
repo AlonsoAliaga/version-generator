@@ -895,7 +895,7 @@ function loadChecking() {
  if(!href.includes(atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw=="))) return;
  let link = atob("aHR0cHM6Ly9hbG9uc29hcGkuZGlzY2xvdWQuYXBwL2NoZWNraW5nP3NpdGU9PHNpdGU+JmtleT08a2V5PiZsb2NrPTxsb2NrPg==")
  //let link = atob("aHR0cHM6Ly9hbG9uc29hcGkuZGlzY2xvdWQuYXBwL2NoZWNraW5nP3NpdGU9PHNpdGU+JmtleT08a2V5Pg==")
-  .replace(/<site>/g,"version-generator").replace(/<key>/g,"KEY-A").replace(/<lock>/g,`${typeof window.getRandomStyle == "undefined" && myTimeout == undefined}`);
+  .replace(/<site>/g,"version-generator").replace(/<key>/g,"KEY-A").replace(/<lock>/g,`${typeof window.getRandomStyle == "undefined" || myTimeout != undefined}`);
  let counter = document.getElementById("online-counter");
  if(counter) {
    $.ajax({
@@ -1011,7 +1011,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },10000)
   },2500)
   setTimeout(()=>{
-    if(typeof window.getRandomStyle == "undefined" && myTimeout == undefined) processAds();
+    if(typeof window.getRandomStyle == "undefined" || myTimeout != undefined) processAds();
   },2000)
 });
 let adCuts = ["ad-1_7-1_8","ad-1_9_2-1_12_2","ad-1_16_4-and-above","ad-1_21-and-above"]

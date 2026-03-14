@@ -352,7 +352,7 @@ function updateWhatShouldIInstallData() {
     wsiiData.innerText = ``
   }else{
     let versionData = serverVersions[wsiiOption.value];
-    let protocol = versionData.protocol;
+    let serverProtocol = versionData.protocol;
     let useViaRewind = false;
     let useViaBackwards = false;
     if(allowedProtocols.length == 0) {
@@ -363,7 +363,7 @@ function updateWhatShouldIInstallData() {
       span.innerText = `If you block all versions players cannot join..`
       wsiiData.appendChild(document.createElement("br"));
       wsiiData.appendChild(span);
-    }else if(allowedProtocols.length == 1 && allowedProtocols[0] == protocol) {
+    }else if(allowedProtocols.length == 1 && allowedProtocols[0] == serverProtocol) {
       wsiiData.innerHTML = ``
       let span = document.createElement("span");
       span.style.fontSize = "25px";
@@ -378,20 +378,16 @@ function updateWhatShouldIInstallData() {
       wsiiData.appendChild(document.createElement("br"));
       wsiiData.appendChild(span2);
     }else{
-      if(protocol >= 107) { //Server 1.9+
-        useViaRewind = [4,5].some(p=> allowedProtocols.includes(p));
-        if(protocol >= 210) {//Server 1.10+
-          for(let allowedProtocol of allowedProtocols) {
-            if(allowedProtocol > 5) {
-              if(allowedProtocol < protocol) {
-                useViaBackwards = true;
-              }
-            }
-          }
+      if(allowedProtocols.some(p=> p <= 5)) { //Requires 1.7.x client support
+        useViaRewind = true;
+      }else{
+        if(serverProtocol >= 107) { //Server 1.9+
+          useViaRewind = allowedProtocols.includes(47); //Requires 1.8.x client support
         }
-      }else{//Server 1.8
-        useViaRewind = allowedProtocols.includes(4);
+        useViaBackwards = allowedProtocols.some(p=> p < serverProtocol); //Requires support for client older than server version
       }
+      if(useViaRewind) useViaBackwards = true; //ViaBackwards required by ViaRewind in all cases.
+      //Populate with 10 ads per section
       if(!useViaRewind && !useViaBackwards) {
         wsiiData.innerHTML = ``
         let span = document.createElement("span");
@@ -896,7 +892,7 @@ function loadChecking() {
  let link = atob("aHR0cHM6Ly9hbG9uc29hcGkuZGlzY2xvdWQuYXBwL2NoZWNraW5nP3NpdGU9PHNpdGU+JmtleT08a2V5PiZsb2NrPTxsb2NrPg==")
  //let link = atob("aHR0cHM6Ly9hbG9uc29hcGkuZGlzY2xvdWQuYXBwL2NoZWNraW5nP3NpdGU9PHNpdGU+JmtleT08a2V5Pg==")
   .replace(/<site>/g,"version-generator").replace(/<key>/g,"KEY-A")
-  .replace(/<lock>/g,(typeof window.getRandomStyle == "undefined" || myTimeout != undefined) ? "yes" : "no");
+  .replace(/<lock>/g,(typeof window.getRandomStyle == "undefined" || myTimeout != undefined || typeof adBlockEnabled == "undefined" || adBlockEnabled) ? "yes" : "no");
  let counter = document.getElementById("online-counter");
  if(counter) {
    $.ajax({

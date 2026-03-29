@@ -161,6 +161,9 @@ const protocols = {
   } ,
   "1.21.11": {
     "number": 774
+  },
+  "26.1": {
+    "number": 775
   } 
 }
 createTableVersion();
@@ -775,6 +778,14 @@ let serverVersions = {
   "1.21.11": {
     protocol: 774,
 	  name: "1.21.11"
+  },
+  "26.1-separator": {
+	  name: "26.1 🐥",
+    disabled: true
+  },
+  "26.1": {
+    protocol: 775,
+	  name: "26.1"
   }
 }
 loadServerVersions();

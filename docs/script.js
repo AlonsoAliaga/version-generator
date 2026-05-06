@@ -162,9 +162,10 @@ const protocols = {
   "1.21.11": {
     "number": 774
   },
-  "26.1": {
-    "number": 775
-  } 
+  "26.1 ➤ 26.1.2": {
+    "number": 775,
+    "versions": ["26.1", "26.1.1", "26.1.2"]
+  }
 }
 createTableVersion();
 function createTableVersion() {
@@ -786,6 +787,14 @@ let serverVersions = {
   "26.1": {
     protocol: 775,
 	  name: "26.1"
+  },
+  "26.1.1": {
+    protocol: 775,
+	  name: "26.1.1"
+  },
+  "26.1.2": {
+    protocol: 775,
+	  name: "26.1.2"
   }
 }
 loadServerVersions();
@@ -1022,7 +1031,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if(typeof window.getRandomStyle == "undefined" || myTimeout != undefined) processAds();
   },2000)
 });
-let adCuts = ["ad-1_7-1_8","ad-1_9_2-1_12_2","ad-1_16_4-and-above","ad-1_21-and-above"]
+let adCuts = ["ad-1_7-1_8","ad-1_9_2-1_12_2","ad-1_16_4-and-above","ad-1_21-and-above","ad-26_1-and-above"]
 function lockCutsWithMessage(className,message,iconUrl='https://raw.githubusercontent.com/AlonsoAliaga/version-generator/main/assets/images/lock-icon.png') {
   let elements = adCuts.map(n=>document.getElementById(n)).filter(Boolean);
   for(let element of elements) {
